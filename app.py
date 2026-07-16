@@ -3,14 +3,19 @@ import requests
 import math
 import time
 import folium
-from geopy.geocoders import Nominatim
+from geopy.geocoders import PureNominatim  # or whatever your import is
+
+st.set_page_config(layout="wide", page_title="PATHMATRIX", page_icon="🗺️", initial_sidebar_state="expanded")
+
 if "bg_start" not in st.session_state:
     st.session_state.bg_start = None
-st.set_page_config(layout="wide", page_title="PATHMATRIX", page_icon="🗺️", initial_sidebar_state="expanded")
+
+if "app_page" not in st.session_state:
+    st.session_state.app_page = "front"
+
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
-
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
