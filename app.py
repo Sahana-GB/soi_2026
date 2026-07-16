@@ -8,7 +8,7 @@ from geopy.geocoders import Nominatim
 st.set_page_config(layout="wide", page_title="PATHMATRIX", page_icon="🗺️", initial_sidebar_state="expanded")
 
 if "bg_start" not in st.session_state:
-    st.session_state.bg_start = None
+    st.session_state.bg_start = "S"
 
 if "app_page" not in st.session_state:
     st.session_state.app_page = "front"
