@@ -581,8 +581,8 @@ elif st.session_state.app_page == "execution":
                 col1, col2 = st.columns([1, 2])
                 with col1:
                     st.header("Parameters")
-                    src_input = st.text_input("Source", value=st.session_state.global_src, placeholder="Enter[place,state]")
-                    dest_input = st.text_input("Destination", value=st.session_state.global_dest, placeholder="Enter[place,state]")
+                    src_input = st.text_input("Source", value=st.session_state.global_src, placeholder="Enter place,state")
+                    dest_input = st.text_input("Destination", value=st.session_state.global_dest, placeholder="Enter place,state")
                     st.session_state.global_src, st.session_state.global_dest = src_input, dest_input
                     
                     st.write("---")
