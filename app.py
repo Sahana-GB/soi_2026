@@ -25,7 +25,7 @@ try:
 except FileNotFoundError:
     pass
 
-TOMTOM_API_KEY = "2CUnNP2IwpEfCL8BYDzKcnjvkW6CB6ig"
+TOMTOM_API_KEY = st.secrets["TOMTOM_API_KEY"]
 
 if "app_page" not in st.session_state:
     st.session_state.app_page = "front"
