@@ -59,10 +59,7 @@ if "raw_matrix_bg" not in st.session_state: st.session_state.raw_matrix_bg = {}
 if "saved_bg_requests" not in st.session_state: st.session_state.saved_bg_requests = []
 
 def render_page_header(title, unique_suffix, back_target_page=None, back_target_step_var=None, back_target_step_val=None):
-    """
-    Renders a unified header with Title on the left, and Switch Engine / Back 
-    buttons vertically stacked on the far right.
-    """
+    
     title_col, button_col = st.columns([8.2, 1.8])
     
     with title_col:
@@ -196,7 +193,7 @@ def run_b(origin, destination, requests, capacity, distance_matrix):
         "passenger_logs": passenger_logs
     }
 
-ORS_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjE4NGRjMmI0NDRiYjQzYWRiZWUzOGI5ZmE3OGIzZjVhIiwiaCI6Im11cm11cjY0In0="
+ORS_API_KEY = st.secrets["ORS_API_KEY"]
 
 def fetch_live_traffic_factor(lat, lon):
     if TOMTOM_API_KEY == "YOUR_TOMTOM_API_KEY_HERE":
