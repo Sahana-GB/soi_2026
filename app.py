@@ -3,7 +3,7 @@ import requests
 import math
 import time
 import folium
-from geopy.geocoders import PureNominatim  
+from geopy.geocoders import Nominatim 
 
 st.set_page_config(layout="wide", page_title="PATHMATRIX", page_icon="🗺️", initial_sidebar_state="expanded")
 
