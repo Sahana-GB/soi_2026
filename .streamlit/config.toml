@@ -1,2 +1,8 @@
 [server]
 scriptPath = "app/app.py"
+[theme]
+primaryColor = "#2b6cb0"
+backgroundColor = "#0e1117"
+secondaryBackgroundColor = "#1a202c"
+textColor = "#ffffff"
+font = "sans serif"
