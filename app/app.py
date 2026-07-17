@@ -198,25 +198,27 @@ def fetch_live_traffic_factor(lat, lon):
     return 1.0
 
 def geocode_address(address_text: str):
-    if not address_text or "," not in address_text:
-        return None
+    if not address_text or address_text.strip() == "": return None
+    
+    query = address_text.strip()
+    # Ensure "India" is in the query for better accuracy
+    if "india" not in query.lower():
+        query += ", India"
         
-    # The API will now receive the input as-is, but with a hard boundary for India
     try:
         geolocator = Nominatim(user_agent="pathmatrix_dynamic_navigation_engine")
         
-        # 'countrycodes=["in"]' strictly restricts results to India
+        # Use 'viewbox' for biasing, but remove 'bounded=True'
+        # This makes Karnataka the "preferred" search area, but not the "only" area
         location = geolocator.geocode(
-            address_text, 
+            query, 
             countrycodes=["in"], 
+            viewbox=[11.0, 74.0, 19.0, 79.0], # Prioritize Karnataka
+            bounded=False, # Relax the restriction
             timeout=5
         )
-        if location: 
-            return [location.latitude, location.longitude]
-    except Exception: 
-        pass
-    
-    return None
+        if location: return [location.latitude, location.longitude]
+    except Exception: pass
     
     try:
         url = f"https://api.openrouteservice.org/geocode/search?api_key={ORS_API_KEY}&text={query}&size=1&boundary.country=IN"
@@ -227,6 +229,7 @@ def geocode_address(address_text: str):
     except Exception: pass
     
     return None
+   
 
 def haversine_fallback(coord1, coord2):
     lat1, lon1 = coord1
