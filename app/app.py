@@ -201,20 +201,18 @@ def geocode_address(address_text: str):
     if not address_text or address_text.strip() == "": return None
     
     query = address_text.strip()
-    # Ensure "India" is in the query for better accuracy
+    
     if "india" not in query.lower():
         query += ", India"
         
     try:
         geolocator = Nominatim(user_agent="pathmatrix_dynamic_navigation_engine")
         
-        # Use 'viewbox' for biasing, but remove 'bounded=True'
-        # This makes Karnataka the "preferred" search area, but not the "only" area
         location = geolocator.geocode(
             query, 
             countrycodes=["in"], 
-            viewbox=[11.0, 74.0, 19.0, 79.0], # Prioritize Karnataka
-            bounded=False, # Relax the restriction
+            viewbox=[11.0, 74.0, 19.0, 79.0], 
+            bounded=False,
             timeout=5
         )
         if location: return [location.latitude, location.longitude]
@@ -437,8 +435,8 @@ elif st.session_state.app_page == "execution":
                 col1, col2 = st.columns([1, 2])
                 with col1:
                     st.header("🏁 Route Parameters")
-                    src_input = st.text_input("Source", value=st.session_state.global_src, placeholder="Enter place,state")
-                    dest_input = st.text_input("Destination", value=st.session_state.global_dest, placeholder="Enter place,state")
+                    src_input = st.text_input("Source", value=st.session_state.global_src, placeholder="Enter place name,city,state")
+                    dest_input = st.text_input("Destination", value=st.session_state.global_dest, placeholder="Enter place name,city,state")
                     st.session_state.global_src, st.session_state.global_dest = src_input, dest_input
                     
                     st.write("---")
@@ -588,8 +586,8 @@ elif st.session_state.app_page == "execution":
                 col1, col2 = st.columns([1, 2])
                 with col1:
                     st.header("Parameters")
-                    src_input = st.text_input("Source", value=st.session_state.global_src, placeholder="Enter place,state")
-                    dest_input = st.text_input("Destination", value=st.session_state.global_dest, placeholder="Enter place,state")
+                    src_input = st.text_input("Source", value=st.session_state.global_src, placeholder="Enter place name,city,state")
+                    dest_input = st.text_input("Destination", value=st.session_state.global_dest, placeholder="Enter place name,city,state")
                     st.session_state.global_src, st.session_state.global_dest = src_input, dest_input
                     
                     st.write("---")
