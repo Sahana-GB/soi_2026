@@ -199,19 +199,33 @@ def fetch_live_traffic_factor(lat, lon):
 
 def geocode_address(address_text: str):
     if not address_text or address_text.strip() == "": return None
+   
     query = address_text.strip()
+    if "india" not in query.lower():
+        query += ", India"
+        
     try:
+        
         geolocator = Nominatim(user_agent="pathmatrix_dynamic_navigation_engine")
-        location = geolocator.geocode(query, timeout=5)
+        location = geolocator.geocode(
+            query, 
+            countrycodes=["in"], 
+            viewbox=[11.0, 74.0, 19.0, 79.0], 
+            bounded=True, 
+            timeout=5
+        )
         if location: return [location.latitude, location.longitude]
     except Exception: pass
+    
+    
     try:
-        url = f"https://api.openrouteservice.org/geocode/search?api_key={ORS_API_KEY}&text={query}&size=1"
+        url = f"https://api.openrouteservice.org/geocode/search?api_key={ORS_API_KEY}&text={query}&size=1&boundary.country=IN"
         response = requests.get(url, timeout=5)
         if response.status_code == 200:
             coords = response.json()['features'][0]['geometry']['coordinates']
             return [coords[1], coords[0]]
     except Exception: pass
+    
     return None
 
 def haversine_fallback(coord1, coord2):
