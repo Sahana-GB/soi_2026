@@ -3,6 +3,7 @@ import requests
 import math
 import time
 import folium
+import os
 from geopy.geocoders import Nominatim 
 
 st.set_page_config(layout="wide", page_title="PATHMATRIX", page_icon="🗺️", initial_sidebar_state="expanded")
@@ -16,10 +17,15 @@ if "app_page" not in st.session_state:
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+css_path = os.path.join(current_dir, "style.css")
+
+if os.path.exists(css_path):
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+else:
+    st.warning("Could not find style.css path!")
 try:
     local_css("style.css")
 except FileNotFoundError:
