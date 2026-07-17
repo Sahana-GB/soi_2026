@@ -55,7 +55,7 @@ https://soi2026-pathmatrix.streamlit.app/
 ---
 
 ## Team
-- Greedy Solvers
+- Greedy Solver
 
 
 
