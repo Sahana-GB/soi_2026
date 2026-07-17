@@ -19,17 +19,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-css_path = os.path.join(current_dir, "style.css")
+root_dir = os.path.dirname(current_dir)
+css_path = os.path.join(root_dir, "style.css")
 
 if os.path.exists(css_path):
-    with open(css_path) as f:
+    with open(css_path, "r") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 else:
-    st.warning("Could not find style.css path!")
-try:
-    local_css("style.css")
-except FileNotFoundError:
-    pass
+    st.error("CSS file not found at the root level!")
 
 TOMTOM_API_KEY = st.secrets["TOMTOM_API_KEY"]
 
