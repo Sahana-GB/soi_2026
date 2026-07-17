@@ -552,17 +552,17 @@ elif st.session_state.app_page == "execution":
                                     if u in matrix_normal and v in matrix_normal[u]:
                                         normal_distance += matrix_normal[u][v]
                                 
-                               base_duration_mins = (normal_distance / 40.0) * 60.0
+                             base_duration_mins = (normal_distance / 40.0) * 60.0
 
 
-                               traffic_multiplier = max(1.0, result.get('distance', normal_distance) / max(0.001, normal_distance))
-                               traffic_adjusted_duration = base_duration_mins * traffic_multiplier
+                             traffic_multiplier = max(1.0, result.get('distance', normal_distance) / max(0.001, normal_distance))
+                             traffic_adjusted_duration = base_duration_mins * traffic_multiplier
 
-                               m_col1, m_col2, m_col3, m_col4 = st.columns(4)
-                               m_col1.metric("Effective Satisfaction Score", f"{max(0.0, result.get('score', 0.0)):.3f}")
-                               m_col2.metric("Traffic-Adjusted Duration", f"{traffic_adjusted_duration:.1f} mins")
-                               m_col3.metric("Normal Distance", f"{normal_distance:.2f} km")
-                               m_col4.metric("Optimization Runtime", f"{runtime:.4f} sec")
+                             m_col1, m_col2, m_col3, m_col4 = st.columns(4)
+                             m_col1.metric("Effective Satisfaction Score", f"{max(0.0, result.get('score', 0.0)):.3f}")
+                             m_col2.metric("Traffic-Adjusted Duration", f"{traffic_adjusted_duration:.1f} mins")
+                             m_col3.metric("Normal Distance", f"{normal_distance:.2f} km")
+                             m_col4.metric("Optimization Runtime", f"{runtime:.4f} sec")
                                 
                                 formatted_seq = " ➔ ".join([display_mapping.get(nid, nid) for nid in ordered_seq])
                                 st.info(f"**Optimized route:** {formatted_seq}")
@@ -698,16 +698,16 @@ elif st.session_state.app_page == "execution":
                                         if u in matrix_normal and v in matrix_normal[u]:
                                             normal_distance += matrix_normal[u][v]
                                     
-                                            base_duration_mins = (normal_distance / 40.0) * 60.0
+                                    base_duration_mins = (normal_distance / 40.0) * 60.0
 
 
-                                            traffic_multiplier = max(1.0, result.get('distance', normal_distance) / max(0.001, normal_distance))
-                                            traffic_adjusted_duration = base_duration_mins * traffic_multiplier
+                                    traffic_multiplier = max(1.0, result.get('distance', normal_distance) / max(0.001, normal_distance))
+                                    traffic_adjusted_duration = base_duration_mins * traffic_multiplier
 
-                                            m_col1, m_col2, m_col3 = st.columns(3)
-                                            m_col1.metric("Traffic-Adjusted Duration", f"{traffic_adjusted_duration:.1f} mins")
-                                            m_col2.metric("Normal Distance", f"{normal_distance:.2f} km")
-                                            m_col3.metric("Algorithm Run Time", f"{runtime_algo:.4f} sec")
+                                     m_col1, m_col2, m_col3 = st.columns(3)
+                                     m_col1.metric("Traffic-Adjusted Duration", f"{traffic_adjusted_duration:.1f} mins")
+                                     m_col2.metric("Normal Distance", f"{normal_distance:.2f} km")
+                                     m_col3.metric("Algorithm Run Time", f"{runtime_algo:.4f} sec")
                                     
                                     formatted_seq = " ➔ ".join([display_mapping.get(nid, nid) for nid in result["route"]])
                                     st.info(f"**Optimized Ride Sharing Pathway:** {formatted_seq}")
