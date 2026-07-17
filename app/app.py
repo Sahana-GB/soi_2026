@@ -627,7 +627,7 @@ elif st.session_state.app_page == "execution":
                                     "name": r_name if r_name.strip() else f"R{i}", 
                                     "pickup_text": r_pickup, 
                                     "drop_text": r_drop,
-                                    "pickup_coords": pickup_coords, # Now contains valid [lat, lon]
+                                    "pickup_coords": pickup_coords, 
                                     "drop_coords": drop_coords,
                                     "count": r_count,
                                     "detour": r_detour  })
