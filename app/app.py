@@ -617,7 +617,21 @@ elif st.session_state.app_page == "execution":
                             st.session_state.requests_storage[f"detour_{i}"] = r_detour
                             
                             if r_pickup.strip() and r_drop.strip():
-                                requests_data.append({"id": i, "name": r_name if r_name.strip() else f"R_{i}", "pickup_text": r_pickup, "drop_text": r_drop, "count": r_count, "max_detour": r_detour})
+                                pickup_coords = geocode_address(r_pickup)
+                                drop_coords = geocode_address(r_drop)
+                                if not pickup_coords or not drop_coords:
+                                    st.error(f"Could not locate '{r_pickup}' or '{r_drop}'. Use format: 'Place, City, State'")
+                                    st.stop()
+                                requests_data.append({
+                                    "id": i, 
+                                    "name": r_name if r_name.strip() else f"R{i}", 
+                                    "pickup_text": r_pickup, 
+                                    "drop_text": r_drop,
+                                    "pickup_coords": pickup_coords, # Now contains valid [lat, lon]
+                                    "drop_coords": drop_coords,
+                                    "count": r_count,
+                                    "detour": r_detour  })
+          
                     
                     if st.button("Optimize Ride Sharing Route", type="primary", use_container_width=True):
                         if src_input and dest_input:
